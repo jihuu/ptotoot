@@ -1,0 +1,26 @@
+---
+ptotoot:
+  build: .
+  command: bundle exec rackup -p 4567
+  ports:
+  - "4567:4567"
+  links:
+  - mariadb:mysql
+  environment:
+    - RAILS_ENV=production
+    - RACK_ENV=production
+    - DB_HOST=mariadb
+    - DB_DATABASE_NAME=ptotoot
+    - DB_USER=root
+    - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  container_name: ptotoot
+mariadb:
+  container_name: mariadb
+  image: "mariadb:10.1.18"
+  ports:
+    - "3306:3306"
+  environment:
+   - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+   - MYSQL_DATABASE=ptotoot
+  volumes:
+   - ${DATABASE_VOLUME_DIRECTORY}:/var/lib/mysql
