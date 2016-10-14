@@ -1,0 +1,5 @@
+source env.vars
+mv database _database
+docker-compose build
+mv _database database
+docker-compose up

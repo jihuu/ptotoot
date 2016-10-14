@@ -1,0 +1,6 @@
+database
+conndb.sh
+run
+stop
+env.vars
+*.temp
